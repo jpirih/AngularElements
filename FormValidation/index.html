@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" type="text/css">
+    <!-- my css file -->
+    <link rel="stylesheet" href="theme.css" type="text/css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- angularJs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <!-- my javascript -->
+    <script src="app.js"></script>
+    <title>Testing form validation </title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1>Learning Form validation in Angular </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Enostavna validacija</h2>
+            <hr>
+            <div class="well">
+                <form novalidate name="myForm" class="form-inline">
+                    <div class="form-group">
+                        <label for="message" class="control-label col-sm-4">Message</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="message" id="message" ng-model="message" ng-required="true" ng-minlength="5" ng-maxlength="100">
+                        </div>
+                    </div>
+                    <button ng-disabled="!myForm.$valid" class="btn btn-success">Go</button>
+                </form>
+            </div>
+
+
+        </div>
+        <div class="col-sm-6">
+            <h2>Izpis Rezultatov</h2>
+            <br>
+            <div class="bg-info">
+                <p>
+                    Form: {{ myForm.message.$viewValue }} <br>
+                    Mdel: {{ message }}
+                </p>
+                <h3>Validacija</h3>
+                <br>
+                <p>
+                    <span class="krepko">Form valid: </span> {{ myForm.$valid }}
+                </p>
+                <h3>Izpis napak </h3>
+                <!-- izpis napak -->
+                <div class="alert alert-danger" ng-if="myForm.message.$error.required && myForm.message.$touched">
+                    Vnos sporočila je obvezen
+                </div>
+                <div class="alert alert-danger" ng-if="myForm.message.$error.minlength && myForm.message.$dirty">
+                    Sporočilo je prekratko.
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- simple dropdoun menu select -->
+    <div class="row" ng-controller="SelectController">
+        <div class="col-sm-6">
+            <h2>Dropdown menu Select</h2>
+            <hr>
+            <div class="well">
+                <form name="selectStudentForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="students" class="control-label col-sm-4">Izberi Študenta</label>
+                        <div class="col-sm-8">
+                            <select name="students" id="students" ng-options="student.name for student in students" ng-model="selectedStudent" class="form-control"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2>Izpis Rezultatov</h2>
+            <hr>
+            <div class="bg-info">
+                <h3>Izbrani študent</h3>
+                <br>
+                <p>
+                    <span class="krepko">StudentID: </span> {{ selectedStudent.id }}
+                </p>
+                <p>
+                    <span class="krepko">Ime: </span> {{ selectedStudent.name }}
+                </p>
+                <p>
+                    <span class="krepko">Starost: </span> {{ selectedStudent.age }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- watch for changes from controller -->
+    <div class="row" ng-controller="WatchController">
+        <div class="col-sm-6">
+            <h2>Sledenje spremembam iz Controllerja </h2>
+            <hr>
+            <div class="well">
+                <form class="form-horizontal">
+                    <div class="form-group"><label for="data" class="control-label col-sm-4">Spremeni me</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="data" id="data" ng-model="data">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2>Izpis Rezultatov</h2>
+            <hr>
+            <div class="bg-info">
+                <h3>Watch from Controller</h3> <br>
+                <p>
+                    <span class="krepko">Spreminjanje vrednosti gleda controller: </span> {{ data }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- filters -->
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Angular filtri</h2>
+            <br>
+            <div class="alert alert-danger" ng-if="filterForm.currency.$error.required">
+                <p>
+                    Vnos polja Currency je obvezen
+                </p>
+            </div>
+            <div class="well">
+                <form class="form-horizontal" name="filterForm">
+                    <div class="form-group"><label for="currency" class="control-label col-sm-4">Currency</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="currency" id="currency" ng-model="currency" ng-required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date" class="control-label col-sm-4">Timestamp (milis)</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="date" id="date" ng-model="date">
+                        </div>
+                    </div>
+                    <div class="form-group"><label for="number" class="control-label col-sm-4">Number</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="number" name="number" ng-model="number">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2>Izpis Rezultatov</h2>
+            <hr>
+            <div class="bg-info">
+                <h3>Filtri</h3>
+                <p>
+                    <span class="krepko">Currency filter: </span> {{ currency | currency: '€': 2}}
+                </p>
+                <p>
+                    <span class="krepko">Date filter: </span> {{ date | date: 'd.MMM.y' }}
+                </p>
+                <p>
+                    <span class="krepko">Number filter: </span> {{ number | number: 3}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
