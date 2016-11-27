@@ -33,6 +33,22 @@ angular.module('app').controller('MainController', function ($scope, $q, $http) 
           $scope.status = "Poba ni uspelo";
       });
     };
+
+    // make reservation $http post request
+    $scope.makeReservation = function (timeslot, email) {
+      var data = {
+          timeslotId: timeslot,
+          email: email
+      };
+
+      $http.post('http://smartninja.betoo.si/api/CMW/reservations', data).then(function (response) {
+            $scope.message = response.data.status;
+            console.log($scope.message);
+        }, function (errorResponse) {
+          $scope.message = "Prišlo je do napake!!";
+      });
+    };
+
     function getPromise() {
         var deferred = $q.defer();
 

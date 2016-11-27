@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <!-- my script -->
+    <script src="js/app.js"></script>
+    <title>Dirktive</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1 class="page-header">Direktive</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="well">
+                <input type="text" ng-model="name" class="form-control">
+                <p>
+                    <strong>$rootScope: </strong> {{ name }}
+                </p>
+
+                <h3>Custom direcitve kot element</h3>
+                <custom-directive asdf="name">
+
+                </custom-directive>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h3>Custom Directive kot atribut</h3>
+            <div class="bg-info" custom-directive asdf="name" ></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
